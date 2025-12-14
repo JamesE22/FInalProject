@@ -18,7 +18,7 @@ import {
 })
 export class HomePage {
 
-  // Hard-coded recipes (only used to initialize localStorage)
+
   hardCodedRecipes: any[] = [
     {
       title: 'Spaghetti Bolognese',
