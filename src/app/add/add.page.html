@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Recipe</ion-title>
+    <ion-button slot="end" (click)="save()" [disabled]="!title || !ingredients || !steps">Save</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input placeholder="Title" [(ngModel)]="title"></ion-input>
+  <ion-textarea placeholder="Ingredients" [(ngModel)]="ingredients"></ion-textarea>
+  <ion-textarea placeholder="Steps" [(ngModel)]="steps"></ion-textarea>
+</ion-content>

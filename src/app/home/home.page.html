@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="page-title">Cookbook</ion-title>
+    <ion-button slot="end" (click)="goAdd()" class="add-button">Add</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let r of recipes; let i = index" (click)="openRecipe(i)" class="recipe-item">
+      <ion-label>{{ r.title }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <p *ngIf="recipes.length === 0">No recipes yet. Click "Add" to create one!</p>
+</ion-content>

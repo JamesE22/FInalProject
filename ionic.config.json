@@ -1,0 +1,7 @@
+{
+  "name": "Cookbook",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

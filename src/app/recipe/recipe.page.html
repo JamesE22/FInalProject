@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="recipe; else notFound">
+    <h2>Ingredients:</h2>
+    <p>{{ recipe.ingredients }}</p>
+
+    <h2>Steps:</h2>
+    <p>{{ recipe.steps }}</p>
+
+    <ion-button color="danger" (click)="delete()">Delete</ion-button>
+  </ng-container>
+
+  <ng-template #notFound>
+    <p>Recipe not found.</p>
+  </ng-template>
+</ion-content>

@@ -1,0 +1,24 @@
+.add-toolbar {
+  --background: #fff3e0;
+  --color: #6b4226;
+}
+
+.save-button {
+  color: #e07a5f;
+  font-weight: bold;
+}
+
+.add-content {
+  padding: 20px;
+  --background: #fff8f2;
+
+  .input-item {
+    margin-bottom: 20px;
+    --background: #ffe5d4;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    ion-input, ion-textarea {
+      color: #5a2d0c;
+    }
+  }
+}
