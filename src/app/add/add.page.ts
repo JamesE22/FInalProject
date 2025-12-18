@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
+// Ionic components
 import {
   IonHeader,
   IonToolbar,
@@ -17,6 +19,8 @@ import {
   standalone: true,
   selector: 'app-add',
   templateUrl: 'add.page.html',
+
+  // Required imports for template
   imports: [
     FormsModule,
     IonHeader,
@@ -32,11 +36,13 @@ import {
 })
 export class AddPage {
 
+  // Form fields
   title = '';
   ingredients = '';
   steps = '';
 
-  hardCodedRecipes: { title: string }[] = [
+  // Used to prevent duplicates from default recipes
+  hardCodedRecipes = [
     { title: 'Spaghetti Bolognese' },
     { title: 'Pancakes' },
     { title: 'Caesar Salad' }
@@ -44,39 +50,52 @@ export class AddPage {
 
   constructor(private router: Router) {}
 
+  // Save recipe to localStorage
   save() {
+
+    // Check if any field is empty
     if (!this.title || !this.ingredients || !this.steps) {
       alert('Please fill all fields before saving!');
       return;
     }
 
-    const duplicate = this.hardCodedRecipes.find((r: { title: string }) =>
-      r.title.toLowerCase() === this.title.trim().toLowerCase()
+    // Check duplicate against hard-coded recipes
+    const duplicate = this.hardCodedRecipes.find(
+      r => r.title.toLowerCase() === this.title.trim().toLowerCase()
     );
 
     if (duplicate) {
-      alert('A recipe with this title already exists. Please choose a different title.');
+      alert('Recipe already exists.');
       return;
     }
 
-    const stored: { title: string; ingredients: string; steps: string }[] = JSON.parse(localStorage.getItem('recipes') || '[]');
+    // Get stored recipes
+    const stored = JSON.parse(
+      localStorage.getItem('recipes') || '[]'
+    );
 
-    const userDuplicate = stored.find((r: { title: string }) =>
-      r.title.toLowerCase() === this.title.trim().toLowerCase()
+    // Check duplicate against user-added recipes
+    const userDuplicate = stored.find(
+      (r: any) =>
+        r.title.toLowerCase() === this.title.trim().toLowerCase()
     );
 
     if (userDuplicate) {
-      alert('You already added a recipe with this title. Please choose a different title.');
+      alert('You already added this recipe.');
       return;
     }
 
+    // Add new recipe
     stored.push({
       title: this.title.trim(),
       ingredients: this.ingredients.trim(),
       steps: this.steps.trim()
     });
 
+    // Save to localStorage
     localStorage.setItem('recipes', JSON.stringify(stored));
+
+    // Go back to home page
     this.router.navigate(['/home']);
   }
 }
