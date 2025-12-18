@@ -1,7 +1,17 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+
+// Ionic components
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
+  IonButtons,
+  IonBackButton
+} from '@ionic/angular/standalone';
 
 @Component({
   standalone: true,
@@ -20,29 +30,54 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonButtons, Ion
   ]
 })
 export class RecipePage {
+
+  // Selected recipe object
   recipe: any;
+
+  // Index of recipe in array
   id: number = 0;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
+  // Load recipe when page opens
   ionViewWillEnter() {
-    const storedRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
 
-    if (storedRecipes[this.id]) {
-      this.recipe = storedRecipes[this.id];
-    } else {
-      this.recipe = null;
-    }
+    // Get stored recipes
+    const storedRecipes = JSON.parse(
+      localStorage.getItem('recipes') || '[]'
+    );
+
+    // Get recipe index from URL
+    this.id = Number(
+      this.route.snapshot.paramMap.get('id')
+    );
+
+    // Assign recipe if exists
+    this.recipe = storedRecipes[this.id] || null;
   }
 
+  // Delete selected recipe
   delete() {
-    const storedRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
 
     if (!this.recipe) return;
 
+    const storedRecipes = JSON.parse(
+      localStorage.getItem('recipes') || '[]'
+    );
+
+    // Remove recipe by index
     storedRecipes.splice(this.id, 1);
-    localStorage.setItem('recipes', JSON.stringify(storedRecipes));
+
+    // Update storage
+    localStorage.setItem(
+      'recipes',
+      JSON.stringify(storedRecipes)
+    );
+
+    // Navigate back to home
     this.router.navigate(['/home']);
   }
 }
