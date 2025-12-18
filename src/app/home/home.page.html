@@ -1,16 +1,49 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="page-title">Cookbook</ion-title>
-    <ion-button slot="end" (click)="goAdd()" class="add-button">Add</ion-button>
+
+    <!-- App title displayed at the top -->
+    <ion-title class="page-title">
+      Cookbook
+    </ion-title>
+
+    <!-- Button to go to Add Recipe page -->
+    <ion-button
+      slot="end"
+      class="add-button"
+      (click)="goAdd()"
+    >
+      Add
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
 
+<!-- MAIN CONTENT -->
 <ion-content>
+
+  <!-- List container for recipes -->
   <ion-list>
-    <ion-item *ngFor="let r of recipes; let i = index" (click)="openRecipe(i)" class="recipe-item">
-      <ion-label>{{ r.title }}</ion-label>
+
+    <!-- Loop through recipes array -->
+    <!-- r = recipe object -->
+    <!-- i = index, used for navigation -->
+    <ion-item
+      *ngFor="let r of recipes; let i = index"
+      class="recipe-item"
+      (click)="openRecipe(i)"
+    >
+
+      <!-- Display recipe title -->
+      <ion-label>
+        {{ r.title }}
+      </ion-label>
+
     </ion-item>
   </ion-list>
 
-  <p *ngIf="recipes.length === 0">No recipes yet. Click "Add" to create one!</p>
+  <!-- Message shown if there are no recipes -->
+  <p *ngIf="recipes.length === 0">
+    No recipes yet. Click "Add" to create one!
+  </p>
+
 </ion-content>
